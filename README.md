@@ -55,10 +55,10 @@ Per default, resource group name will start with *e2e-churn-demo-*
 
 * Create a cluster : https://docs.microsoft.com/en-us/azure/databricks/clusters/create
 * Mount the storage (created during the deployment) in Databricks
-  * You can use the notebook "Churn 00_Mount Storage"
-* You can use the notebook "Load Data" (uploaded automatically during the deployment) as a template
+  * You can use the notebook "Churn 00_Mount Storage"  (uploaded automatically during the deployment) as a template
   * The example relies on Azure Key Vault and Databricks Key Vault https://docs.microsoft.com/en-us/azure/databricks/security/secrets/secret-scopes
   * https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/adls-gen2/azure-datalake-gen2-sp-access
+* Upload KKbox Dataset from Kaggle (https://www.kaggle.com/c/kkbox-churn-prediction-challenge/data) then run the notebook called "Load Data" (uploaded automatically during the deployment)
 
 # Step 2 Run the sql scripts in the Synapse Serverless Pool
 
