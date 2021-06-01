@@ -51,7 +51,14 @@ In addition of creating resources, deployment will also:
 From the resource-group tf file in the resource-group directory, you will find out what is the name of the resource group created.
 Per default, resource group name will start with *e2e-churn-demo-*
 
-# Step 1 Run the sql scripts in the Synapse Serverless Pool
+# Step 1 Databricks setup
+
+* Mount the storage (created during the deployment) in Databricks
+* You can use the notebook "Load Data" (uploaded automatically during the deployment) as a template
+  * The example relies on Azure Key Vault and Databricks Key Vault https://docs.microsoft.com/en-us/azure/databricks/security/secrets/secret-scopes
+  * https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/adls-gen2/azure-datalake-gen2-sp-access
+
+# Step 2 Run the sql scripts in the Synapse Serverless Pool
 
 When deploying the solution, SQL scripts are uploaded automatically.
 <br>![image](https://user-images.githubusercontent.com/49620357/120351541-f934bf80-c2cd-11eb-992c-c57da656986c.png)
@@ -66,14 +73,14 @@ Please run at least these 2 scripts in this order on the serverless pool:
 <br> Make sure to select the serverless Pool
 ![image](https://user-images.githubusercontent.com/49620357/120357236-3780ad80-c2d3-11eb-9786-32cf433585ad.png)
 
-# Step 2 Role assignment
+# Step 3 Role assignment
 https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal?tabs=current
  * Assign the storage blob data contributor role to e2e-churn-demo-3v8nqm (Synapse Workspace) for the storage e2echurndemostor3v8nqm
  * Assign the storage blob data contributor role to e2e-churn-demo-workspace-3v8nqm (Databricks Workspace) for the storage e2echurndemostor3v8nqm
    * As for Databricks, You will have to create a Service Principal. It will be used to access the data lake.
    * https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/adls-gen2/azure-datalake-gen2-sp-access
 
-# Step 3 Check Linked Services in Azure Synapse
+# Step 4 Check Linked Services in Azure Synapse
 
 When deploying the solution, Linked Services are created automatically.
 
@@ -87,7 +94,7 @@ Please verify the connection for the following Linked Services:
   * Create a cluster in Databricks that will be used to run the Databricks Notebooks : https://docs.microsoft.com/en-us/azure/databricks/clusters/create
   * Enter these information and test the connection
 
-# Step 4 Azure Function (optional)
+# Step 5 Azure Function (optional)
 An Azure function is automatically created once deployment is complete.
 <br>You will have to implement the code. In this case, bind the function to a queue.
 <br> In this architecture we are sending a message to a queue (predictionChurning) to trigger a logic app workflow. The logic app will send an email with a Power BI dashboard attached containing information about potential customer churns.
@@ -96,7 +103,7 @@ An Azure function is automatically created once deployment is complete.
 <br>![image](https://user-images.githubusercontent.com/49620357/120368892-9862b280-c2e0-11eb-9ba4-68835aaa7732.png)
 https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-webhook
 
-# Step 5 Azure Logic App (optional)
+# Step 6 Azure Logic App (optional)
 
 You can implement easily different type of logic with logic app.
 <br>In this architecture, we use it to automatically refresh the Power BI report then send an email with the dashboard attached.
@@ -104,7 +111,7 @@ You can implement easily different type of logic with logic app.
 
 <br>![image](https://user-images.githubusercontent.com/49620357/120371732-386e0b00-c2e4-11eb-8e91-97ddeebc6261.png)
 
-# Step 6 Run the different pipelines
+# Step 7 Run the different pipelines
 * You can create the model directly in Databricks or use the pipeline Churning Model Creation in Azure Synapse
   * You will have to mount the storage and have the KKbox dataset in your datalake.
 * You can run the prediction notebook in Databricks or use the pipeline Churning predictions in Azure Synapse
