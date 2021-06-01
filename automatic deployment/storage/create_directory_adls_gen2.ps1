@@ -17,7 +17,7 @@ New-AzDataLakeGen2Item -Context $ctx -FileSystem $filesystemName -Path "user_log
 
 New-AzDataLakeGen2Item -Context $ctx -FileSystem $filesystemName -Path "synapse/tables/members" -Directory
 New-AzDataLakeGen2Item -Context $ctx -FileSystem $filesystemName -Path "synapse/tables/predictions" -Directory
-New-AzDataLakeGen2Item -Context $ctx -FileSystem $filesystemName -Path "synapse/tables/user_logs"  -Directory
+New-AzDataLakeGen2Item -Context $ctx -FileSystem $filesystemName -Path "synapse/tables/users_logs"  -Directory
 
 
 
