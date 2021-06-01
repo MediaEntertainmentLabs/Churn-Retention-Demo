@@ -53,6 +53,7 @@ Per default, resource group name will start with *e2e-churn-demo-*
 
 # Step 1 Databricks setup
 
+* Create a cluster : https://docs.microsoft.com/en-us/azure/databricks/clusters/create
 * Mount the storage (created during the deployment) in Databricks
 * You can use the notebook "Load Data" (uploaded automatically during the deployment) as a template
   * The example relies on Azure Key Vault and Databricks Key Vault https://docs.microsoft.com/en-us/azure/databricks/security/secrets/secret-scopes
