@@ -2,7 +2,7 @@
 	"name": "Create Database Demo",
 	"properties": {
 		"content": {
-			"query": "IF NOT EXISTS ( SELECT TOP 1 * FROM sys.databases WHERE [Name] = 'DEMO')\n    CREATE DATABASE DEMO\nGO\n",
+			"query": "IF NOT EXISTS ( SELECT TOP 1 * FROM sys.databases WHERE [Name] = 'DEMO')\n    CREATE DATABASE DEMO\n    COLLATE LATIN1_GENERAL_100_CI_AS_SC_UTF8\nGO\n",
 			"metadata": {
 				"language": "sql"
 			},
