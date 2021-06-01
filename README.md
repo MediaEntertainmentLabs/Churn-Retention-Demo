@@ -60,7 +60,14 @@ Per default, resource group name will start with *e2e-churn-demo-*
   * https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/adls-gen2/azure-datalake-gen2-sp-access
 * Upload KKbox Dataset from Kaggle (https://www.kaggle.com/c/kkbox-churn-prediction-challenge/data) then run the notebook called "Load Data" (uploaded automatically during the deployment)
 
-# Step 2 Run the sql scripts in the Synapse Serverless Pool
+# Step 2 Role assignment
+https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal?tabs=current
+ * Assign the storage blob data contributor role to e2e-churn-demo-3v8nqm (Synapse Workspace) for the storage e2echurndemostor3v8nqm
+ * Assign the storage blob data contributor role to e2e-churn-demo-workspace-3v8nqm (Databricks Workspace) for the storage e2echurndemostor3v8nqm
+   * As for Databricks, You will have to create a Service Principal. It will be used to access the data lake.
+   * https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/adls-gen2/azure-datalake-gen2-sp-access
+
+# Step 3 Run the sql scripts in the Synapse Serverless Pool
 
 When deploying the solution, SQL scripts are uploaded automatically.
 <br>![image](https://user-images.githubusercontent.com/49620357/120351541-f934bf80-c2cd-11eb-992c-c57da656986c.png)
@@ -75,12 +82,6 @@ Please run at least these 2 scripts in this order on the serverless pool:
 <br> Make sure to select the serverless Pool
 ![image](https://user-images.githubusercontent.com/49620357/120357236-3780ad80-c2d3-11eb-9786-32cf433585ad.png)
 
-# Step 3 Role assignment
-https://docs.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal?tabs=current
- * Assign the storage blob data contributor role to e2e-churn-demo-3v8nqm (Synapse Workspace) for the storage e2echurndemostor3v8nqm
- * Assign the storage blob data contributor role to e2e-churn-demo-workspace-3v8nqm (Databricks Workspace) for the storage e2echurndemostor3v8nqm
-   * As for Databricks, You will have to create a Service Principal. It will be used to access the data lake.
-   * https://docs.microsoft.com/en-us/azure/databricks/data/data-sources/azure/adls-gen2/azure-datalake-gen2-sp-access
 
 # Step 4 Check Linked Services in Azure Synapse
 
