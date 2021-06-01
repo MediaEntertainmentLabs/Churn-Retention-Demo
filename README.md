@@ -119,7 +119,7 @@ You can implement easily different type of logic with logic app.
   * You will have to mount the storage and have the KKbox dataset in your datalake.
 * You can run the prediction notebook in Databricks or use the pipeline Churning predictions in Azure Synapse
 * You can run the notification pipeline in Azure Synapse to trigger the Logic app workflow and receive the Power BI report automatically in an email.
-  * You can also visualize directly the report in Azure Synapse Pipeline.
+  * You can also visualize directly the report in Azure Synapse.
   * https://docs.microsoft.com/en-us/azure/synapse-analytics/quickstart-power-bi 
 
 
