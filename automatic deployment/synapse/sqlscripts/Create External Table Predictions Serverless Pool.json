@@ -1,0 +1,17 @@
+{
+	"name": "Create External Table Predictions Serverless Pool",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS (SELECT * FROM sys.external_file_formats WHERE name = 'SynapseParquetFormat') \n\tCREATE EXTERNAL FILE FORMAT [SynapseParquetFormat] \n\tWITH ( FORMAT_TYPE = PARQUET)\nGO\n\n\nIF NOT EXISTS(SELECT * FROM sys.external_data_sources WHERE name = 'e2e_churning_demo') \n\tCREATE EXTERNAL DATA SOURCE [e2e_churning_demo] \n\tWITH (\n\t\tLOCATION = 'abfss://churning@churninge2edemo.dfs.core.windows.net',\n\t\t CREDENTIAL = WorkspaceIdentity\n\t)\nGO\n\n--DROP EXTERNAL TABLE dbo.Ext_E2E_Churning_demo_predictions\nIF NOT EXISTS(SELECT TOP 1 * FROM dbo.Ext_E2E_Churning_demo_predictions)\nCREATE EXTERNAL TABLE dbo.Ext_E2E_Churning_demo_predictions (\n    [msno] varchar(100),\n\t[churn] int,\n\t[period] varchar(100)\n\t)\n\tWITH (\n\tLOCATION = 'synapse/tables/predictions/',\n\tDATA_SOURCE = [e2e_churning_demo],\n\tFILE_FORMAT = [SynapseParquetFormat]\n\t)\nGO\n\n\n--SELECT TOP 100 * FROM dbo.Ext_E2E_Churning_demo_predictions\n--GO\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "demo"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

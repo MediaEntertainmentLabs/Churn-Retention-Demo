@@ -1,0 +1,83 @@
+{
+    "name": "Serverless_Dataset",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "Serverless Synapse",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "AzureSqlDWTable",
+        "schema": [
+            {
+                "name": "msno",
+                "type": "varchar"
+            },
+            {
+                "name": "churn",
+                "type": "int",
+                "precision": 10
+            },
+            {
+                "name": "period",
+                "type": "varchar"
+            },
+            {
+                "name": "city",
+                "type": "varchar"
+            },
+            {
+                "name": "bd",
+                "type": "varchar"
+            },
+            {
+                "name": "gender",
+                "type": "varchar"
+            },
+            {
+                "name": "registered_via",
+                "type": "varchar"
+            },
+            {
+                "name": "registration_init_time",
+                "type": "varchar"
+            },
+            {
+                "name": "date",
+                "type": "varchar"
+            },
+            {
+                "name": "num_25",
+                "type": "varchar"
+            },
+            {
+                "name": "num_50",
+                "type": "varchar"
+            },
+            {
+                "name": "num_75",
+                "type": "varchar"
+            },
+            {
+                "name": "num_985",
+                "type": "varchar"
+            },
+            {
+                "name": "num_100",
+                "type": "varchar"
+            },
+            {
+                "name": "num_unq",
+                "type": "varchar"
+            },
+            {
+                "name": "total_secs",
+                "type": "varchar"
+            }
+        ],
+        "typeProperties": {
+            "schema": "dbo",
+            "table": "kkboxChurningView"
+        }
+    },
+    "type": "Microsoft.Synapse/workspaces/datasets"
+}

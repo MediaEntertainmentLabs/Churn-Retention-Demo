@@ -1,0 +1,87 @@
+{
+    "name": "Churning Model Creation",
+    "properties": {
+        "activities": [
+            {
+                "name": "Data Preparation",
+                "type": "DatabricksNotebook",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Demo/Churning/Churn 01: Data Preparation"
+                },
+                "linkedServiceName": {
+                    "referenceName": "Databricks",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Feature Engineering",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "Data Preparation",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Demo/Churning/Churn 02: Feature Engineering"
+                },
+                "linkedServiceName": {
+                    "referenceName": "Databricks",
+                    "type": "LinkedServiceReference"
+                }
+            },
+            {
+                "name": "Model Creation",
+                "type": "DatabricksNotebook",
+                "dependsOn": [
+                    {
+                        "activity": "Feature Engineering",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "notebookPath": "/Demo/Churning/Churn 03: Hyperparameter Tuning MLPClassifier"
+                },
+                "linkedServiceName": {
+                    "referenceName": "Databricks",
+                    "type": "LinkedServiceReference"
+                }
+            }
+        ],
+        "folder": {
+            "name": "E2E-Demo"
+        },
+        "annotations": [],
+        "lastPublishTime": "2021-05-11T18:56:18Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

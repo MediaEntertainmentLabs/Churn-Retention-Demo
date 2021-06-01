@@ -1,0 +1,22 @@
+{
+    "name": "Sink_Transactions_Dataset",
+    "properties": {
+        "linkedServiceName": {
+            "referenceName": "#LinkedServiceName#",
+            "type": "LinkedServiceReference"
+        },
+        "annotations": [],
+        "type": "DelimitedText",
+        "typeProperties": {
+            "location": {
+                "type": "AzureBlobFSLocation",
+                "folderPath": "transactions",
+                "fileSystem": "#filesystem#"
+            },
+            "columnDelimiter": ",",
+            "escapeChar": "\\",
+            "quoteChar": "\""
+        },
+        "schema": []
+    }
+}

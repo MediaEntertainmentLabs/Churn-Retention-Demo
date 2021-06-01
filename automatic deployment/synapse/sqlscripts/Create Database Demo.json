@@ -1,0 +1,17 @@
+{
+	"name": "Create Database Demo",
+	"properties": {
+		"content": {
+			"query": "IF NOT EXISTS ( SELECT TOP 1 * FROM sys.databases WHERE [Name] = 'DEMO')\n    CREATE DATABASE DEMO\nGO\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "master"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}

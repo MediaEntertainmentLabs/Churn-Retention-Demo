@@ -1,0 +1,97 @@
+{
+    "name": "Churning Notifications",
+    "properties": {
+        "activities": [
+            {
+                "name": "Check If Churning Exists",
+                "type": "Lookup",
+                "dependsOn": [],
+                "policy": {
+                    "timeout": "7.00:00:00",
+                    "retry": 0,
+                    "retryIntervalInSeconds": 30,
+                    "secureOutput": false,
+                    "secureInput": false
+                },
+                "userProperties": [],
+                "typeProperties": {
+                    "source": {
+                        "type": "SqlDWSource",
+                        "sqlReaderQuery": "select count(distinct msno) AS Total from dbo.kkboxChurningView",
+                        "queryTimeout": "02:00:00",
+                        "partitionOption": "None"
+                    },
+                    "dataset": {
+                        "referenceName": "Serverless_Dataset",
+                        "type": "DatasetReference"
+                    }
+                }
+            },
+            {
+                "name": "Check Notification To Be Sent",
+                "type": "IfCondition",
+                "dependsOn": [
+                    {
+                        "activity": "Check If Churning Exists",
+                        "dependencyConditions": [
+                            "Succeeded"
+                        ]
+                    }
+                ],
+                "userProperties": [],
+                "typeProperties": {
+                    "expression": {
+                        "value": "@greater(activity('Check If Churning Exists').output.firstRow.Total,pipeline().parameters.Threshold)",
+                        "type": "Expression"
+                    },
+                    "ifFalseActivities": [
+                        {
+                            "name": "Notification not sent",
+                            "type": "Wait",
+                            "dependsOn": [],
+                            "userProperties": [],
+                            "typeProperties": {
+                                "waitTimeInSeconds": 10
+                            }
+                        }
+                    ],
+                    "ifTrueActivities": [
+                        {
+                            "name": "Send Message To Churning Queue",
+                            "type": "AzureFunctionActivity",
+                            "dependsOn": [],
+                            "policy": {
+                                "timeout": "7.00:00:00",
+                                "retry": 0,
+                                "retryIntervalInSeconds": 30,
+                                "secureOutput": false,
+                                "secureInput": false
+                            },
+                            "userProperties": [],
+                            "typeProperties": {
+                                "functionName": "TriggerChurningReporting",
+                                "method": "GET"
+                            },
+                            "linkedServiceName": {
+                                "referenceName": "Function",
+                                "type": "LinkedServiceReference"
+                            }
+                        }
+                    ]
+                }
+            }
+        ],
+        "parameters": {
+            "Threshold": {
+                "type": "int",
+                "defaultValue": 300
+            }
+        },
+        "folder": {
+            "name": "E2E-Demo"
+        },
+        "annotations": [],
+        "lastPublishTime": "2021-05-14T17:12:35Z"
+    },
+    "type": "Microsoft.Synapse/workspaces/pipelines"
+}

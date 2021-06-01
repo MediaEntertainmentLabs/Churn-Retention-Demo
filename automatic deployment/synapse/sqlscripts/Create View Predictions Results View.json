@@ -1,0 +1,17 @@
+{
+	"name": "Create View Predictions Results View",
+	"properties": {
+		"content": {
+			"query": "CREATE VIEW kkboxChurningView AS\n\nSELECT predictions.*, members.city, members.bd, members.gender, members.registered_via, members.registration_init_time,\n users.date, users.num_25, users.num_50, users.num_75, users.num_985, users.num_100, num_unq, total_secs\n\nFROM\ndbo.Ext_E2E_Churning_demo_members as members\n\nINNER JOIN dbo.Ext_E2E_Churning_demo_predictions as predictions\nON members.msno = predictions.msno\n\nINNER join dbo.Ext_E2E_Churning_demo_User_Logs as users\non members.msno = users.msno\n\nGO\n\n--select * from kkboxChurningView\n\n--select count(distinct(msno)) from kkboxChurningView\n",
+			"metadata": {
+				"language": "sql"
+			},
+			"currentConnection": {
+				"poolName": "Built-in",
+				"databaseName": "demo"
+			},
+			"resultLimit": 5000
+		},
+		"type": "SqlQuery"
+	}
+}
