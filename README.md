@@ -26,11 +26,14 @@ Use a Power BI dashboard to get meaningfull insights and prevent customers to ch
 * Azure Subscription
 * Terraform (for deployment)
 * Powershell (for deployment)
-* Databricks Powershell (for the Databricks deployment part) : https://github.com/gbrueckl/Databricks.API.PowerShell
+* Databricks Powershell Module (for the Databricks deployment part) : https://github.com/gbrueckl/Databricks.API.PowerShell
+  * You might need to bypass the execution policy to install this module
+    * https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.security/set-executionpolicy?view=powershell-7.1
+    * Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
   * Install-Module -Name DatabricksPS
 
 # Deployment
-Run the following commands from the automatic deployment directory:
+Run the following commands from the automatic deployment directory (**run them from a powershell**):
 * terraform init
 * terraform plan
 * terraform apply -auto-approve
@@ -39,7 +42,7 @@ Deployment will create all the resources part of the architecture.
 <br>![image](https://user-images.githubusercontent.com/49620357/120354216-42860e80-c2d0-11eb-9723-1b376ad7813f.png)
 In addition of creating resources, deployment will also:
 * Azure Databricks
-  * Upload notebook in the Databricks Workspace
+  * Upload notebooks in the Databricks Workspace
 * Azure Synapse Analytics
   * Upload Sql scripts in Azure Synapse Analytics
   * Create the Linked Services
