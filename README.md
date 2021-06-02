@@ -114,6 +114,8 @@ https://docs.microsoft.com/en-us/azure/azure-functions/functions-bindings-http-w
 You can implement easily different type of logic with logic app.
 <br>In this architecture, we use it to automatically refresh the Power BI report then send an email with the dashboard attached.
 <br>https://docs.microsoft.com/en-us/azure/logic-apps/logic-apps-overview
+<br> You might need either Power BI premium or enable Power BI embedded to make the Power Bi part working
+  * https://docs.microsoft.com/en-us/powerapps/maker/portals/admin/set-up-power-bi-integration#:~:text=%20Enable%20Power%20BI%20Embedded%20service%20%201,center.%20Go%20to%20Set%20up%20Power...%20More%20
 
 <br>![image](https://user-images.githubusercontent.com/49620357/120371732-386e0b00-c2e4-11eb-8e91-97ddeebc6261.png)
 
