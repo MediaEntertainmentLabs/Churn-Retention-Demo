@@ -127,6 +127,7 @@ $workloadPipelines = [ordered]@{
     "Churning Model Creation" = "Churning_Model_Creation"
     "Churning Predictions" = "Churning_Predictions"
     "Churning Notifications" = "Churning_Notifications"
+    "Churning E2E" = "Churning_E2E"
 }
 
 foreach ($pipeline in $workloadPipelines.Keys) 
