@@ -66,3 +66,10 @@ module "functions"{
   storage-account-name =  module.storage.storage-account-name
   storage-account-primary-key = module.storage.storage-account-key
 }
+
+module "logic-app"{
+  source = "./logic-app"
+  location = module.variables.location
+  resource-group-name =  module.resource-group.resource-group-name
+  random_string_result = module.variables.random_string_result
+}
