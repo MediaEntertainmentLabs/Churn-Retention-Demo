@@ -1,0 +1,87 @@
+{
+	"name": "Churning E2E",
+	"properties": {
+		"description": "Not supposed to be run.\nShow the different parts of the overall solution",
+		"activities": [
+			{
+				"name": "Model Creation",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Data Ingestion",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Churning Model Creation",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Predictions",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Model Creation",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Churning Predictions",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Notifications",
+				"type": "ExecutePipeline",
+				"dependsOn": [
+					{
+						"activity": "Predictions",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Churning Notifications",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			},
+			{
+				"name": "Data Ingestion",
+				"type": "ExecutePipeline",
+				"dependsOn": [],
+				"userProperties": [],
+				"typeProperties": {
+					"pipeline": {
+						"referenceName": "Churning Data Ingestion",
+						"type": "PipelineReference"
+					},
+					"waitOnCompletion": true
+				}
+			}
+		],
+		"folder": {
+			"name": "E2E-Demo"
+		},
+		"annotations": [],
+		"lastPublishTime": "2021-05-14T19:48:32Z"
+	},
+	"type": "Microsoft.Synapse/workspaces/pipelines"
+}
